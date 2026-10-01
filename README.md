@@ -14,6 +14,11 @@ A free, static browser automation practice playground for QA engineers. The site
 - Native date/time inputs with date-range validation
 - Mouse hover, double-click, and context-menu exercises
 - Keyboard event capture and Enter-to-submit practice
+- File validation, simulated uploads, and CSV/JSON/TXT/PDF downloads
+- Drag-and-drop task board with keyboard-operable move controls
+- New tabs/windows, isolated iframe form, and open Shadow DOM component
+- Local fake authentication, simulated network responses, and deterministic challenge scenarios
+- Custom date picker with disabled weekends and date-range validation
 - Responsive, keyboard-accessible single-page navigation
 
 All exercise data and behavior run in the browser. There is no backend, account, or data persistence. Reloading restores the initial exercise state.
@@ -48,8 +53,8 @@ $env:VITE_BASE_PATH = "/qa-r-and-d-lab/"
 npm run build
 ```
 
-For a user/organization site served from the domain root, the default `/` base path is appropriate. For a user/organization site served from the domain root, the default `/` base path is appropriate.
+For a user/organization site served from the domain root, the default `/` base path is appropriate.
 
 ## Practice approach
 
-Each exercise provides a task and a visible result to verify. No framework-specific solution code is included, so learners can choose their own automation tool and locator strategy. Core scenarios use stable data and bounded timing to keep automation repeatable.
+Each exercise provides a task and a visible result to verify. No framework-specific solution code is included, so learners can choose their own automation tool and locator strategy. Core scenarios use stable data and bounded timing to keep automation repeatable. Authentication, network results, uploads, and downloads are local demonstrations; no credentials or file contents leave the browser.

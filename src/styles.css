@@ -278,6 +278,83 @@ tbody tr:hover { background: #fcfbff; }
 .context-menu button:hover, .context-menu button:focus-visible { color: #6553d1; background: #f4f2ff; }
 .keyboard-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 10px; }
 
+.uploaded-file-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.uploaded-file-list li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 10px; border: 1px solid #edf0f4; border-radius: 6px; background: #fafbfc; }
+.uploaded-file-list li > span { display: grid; gap: 3px; min-width: 0; }
+.uploaded-file-list strong { overflow: hidden; color: #556178; font-size: 10px; text-overflow: ellipsis; }
+.uploaded-file-list small { color: #909aaa; font-size: 9px; }
+.upload-errors { padding: 10px 12px; border: 1px solid #f1d8d9; border-radius: 6px; color: #ae5258; background: #fff7f7; font-size: 10px; }
+.upload-errors ul { margin: 6px 0 0; padding-left: 17px; line-height: 1.6; }
+.upload-progress { display: flex; align-items: center; gap: 9px; color: #7562d7; font-size: 9px; font-weight: 700; }
+.upload-progress .progress-track { flex: 1; }
+.upload-progress .progress-fill { background: #7461dc; transition: width .15s linear; }
+.download-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.download-card { min-width: 0; display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #e8ebf1; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; }
+.download-card:hover { border-color: #cfc8f2; background: #fcfbff; }
+.download-file-icon { width: 31px; height: 34px; flex: 0 0 31px; display: grid; place-items: center; border-radius: 6px; color: #6c59d6; background: #f1efff; font-size: 17px; }
+.download-card > span:nth-child(2) { min-width: 0; display: grid; gap: 4px; }
+.download-card strong { overflow: hidden; color: #4c5870; font-size: 10px; text-overflow: ellipsis; }
+.download-card small { color: #929cad; font-size: 9px; }
+.download-arrow { margin-left: auto; color: #8c96a6; }
+
+.task-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; }
+.task-column { min-width: 0; min-height: 180px; padding: 10px; border: 1px solid #e8ebf1; border-radius: 8px; background: #f8f9fc; transition: border-color .15s, background .15s; }
+.task-column.accepts-drop { border-style: dashed; border-color: #b7adee; background: #f5f3ff; }
+.task-column-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; }
+.task-column-head h3 { margin: 0; color: #4c5971; font-size: 10px; }
+.task-column-head > span { min-width: 19px; padding: 3px 5px; border-radius: 99px; color: #768298; background: white; text-align: center; font-size: 9px; }
+.task-column-content { display: grid; gap: 7px; }
+.draggable-task { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 5px 7px; padding: 9px; border: 1px solid #e7eaf0; border-radius: 6px; background: white; cursor: grab; }
+.draggable-task:active { cursor: grabbing; }
+.draggable-task.task-dragging { opacity: .5; }
+.drag-handle { color: #a4adbb; font-size: 13px; }
+.draggable-task strong { color: #58657c; font-size: 9px; line-height: 1.5; }
+.draggable-task select { grid-column: 2; min-width: 0; width: 100%; padding: 5px; border: 1px solid #e4e8ef; border-radius: 4px; color: #788398; background: #fff; font-size: 8px; }
+.drop-empty { margin: 12px 0; color: #a2abba; text-align: center; font-size: 9px; }
+
+.auth-form { display: grid; gap: 14px; max-width: 620px; }
+.auth-session { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #dcefe5; border-radius: 8px; background: #f6fbf7; }
+.auth-avatar { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border-radius: 50%; color: #368060; background: #e4f4e9; font-size: 10px; font-weight: 800; }
+.auth-session > div { flex: 1; }
+.auth-session strong { color: #3f795f; font-size: 10px; }
+.auth-session p { margin: 3px 0 0; color: #84978c; font-size: 9px; }
+.credential-note { display: grid; gap: 5px; padding: 11px 12px; border: 1px solid #e9edf2; border-radius: 6px; color: #78849a; background: #f8f9fc; font-size: 9px; }
+.credential-note strong { color: #58657c; font-size: 10px; }
+.credential-note code { padding: 1px 4px; border-radius: 3px; color: #6755cc; background: #efedff; font-size: 9px; }
+.network-controls { display: flex; align-items: end; gap: 10px; flex-wrap: wrap; }
+.network-controls .field { width: min(100%, 270px); }
+.network-result { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border: 1px solid; border-radius: 7px; }
+.network-result strong { font-size: 10px; }
+.network-result p { margin: 4px 0 0; font-size: 10px; line-height: 1.5; }
+.network-success { border-color: #d7ede1; color: #428063; background: #f5fbf7; }
+.network-error { border-color: #f0dcdc; color: #a9585b; background: #fff8f8; }
+
+.challenge-notice { margin: 0 0 15px; }
+.challenge-selector { min-height: 39px; padding: 0 12px; border: 1px solid #dcd7f6; border-radius: 6px; color: #5f50bf; background: #f7f6ff; cursor: pointer; font-size: 10px; font-weight: 700; }
+.challenge-class-0 { background: #f7f6ff; }
+.challenge-class-1 { border-color: #cce9dc; color: #3b8668; background: #f1faf5; }
+.challenge-class-2 { border-color: #f1dfc5; color: #ae793f; background: #fff9f0; }
+.challenge-hidden-message { display: none; margin: 0; padding: 10px; border: 1px solid #e8e4fb; border-radius: 6px; color: #6755c8; background: #f8f7ff; font-size: 10px; }
+.challenge-hidden-message.challenge-message-visible { display: block; }
+.moving-target-stage { min-height: 120px; position: relative; border: 1px dashed #e1e5ec; border-radius: 7px; background: #fafbfc; }
+.moving-target { position: absolute; min-height: 31px; padding: 0 9px; border: 1px solid #dcd7f6; border-radius: 5px; color: #6754d0; background: #f4f2ff; cursor: pointer; font-size: 9px; font-weight: 700; transition: left .2s, top .2s; }
+.moving-position-0 { top: 9px; left: 9px; }
+.moving-position-1 { top: 9px; right: 9px; }
+.moving-position-2 { bottom: 9px; left: 9px; }
+.moving-position-3 { right: 9px; bottom: 9px; }
+.challenge-list { margin: 0; padding: 9px 9px 9px 29px; border: 1px solid #edf0f4; border-radius: 6px; color: #68758b; background: #fafbfc; font-size: 9px; line-height: 1.8; }
+
+.practice-iframe { display: block; width: 100%; min-height: 340px; border: 1px solid #e5e9ef; border-radius: 8px; background: white; }
+.calendar-widget { width: min(100%, 340px); display: grid; gap: 11px; }
+.calendar-heading { display: flex; align-items: center; justify-content: space-between; }
+.calendar-heading strong { color: #4d5a72; font-size: 11px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.calendar-weekday { padding: 5px 0; color: #969faf; text-align: center; font-size: 8px; font-weight: 700; }
+.calendar-day, .calendar-blank { min-width: 0; aspect-ratio: 1; display: grid; place-items: center; }
+.calendar-day { padding: 0; border: 1px solid transparent; border-radius: 5px; color: #5b6880; background: white; cursor: pointer; font-size: 9px; }
+.calendar-day:hover:not(:disabled), .calendar-day.calendar-selected { border-color: #d8d1fa; color: #6250ce; background: #f1efff; }
+.calendar-day:disabled { color: #c5cad2; background: #f5f6f8; cursor: not-allowed; text-decoration: line-through; }
+
 .page-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 29px 0 0; padding: 17px 0 20px; border-top: 1px solid #e7eaf0; color: #9aa4b4; font-size: 9px; }
 .page-footer a { color: #7a6bd4; text-decoration: none; font-weight: 700; }
 .page-footer a:hover { text-decoration: underline; }
@@ -290,6 +367,7 @@ tbody tr:hover { background: #fcfbff; }
   .welcome-banner { padding: 31px; }
   .overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .filter-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .task-board { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
   .topbar { height: 66px; padding: 0 17px; }
@@ -343,6 +421,7 @@ tbody tr:hover { background: #fcfbff; }
   .pagination-footer { align-items: flex-start; flex-direction: column; }
   .pagination-controls { width: 100%; flex-wrap: wrap; }
   .filter-panel, .filter-results { grid-template-columns: 1fr; }
+  .download-grid { grid-template-columns: 1fr; }
   .keyboard-form { grid-template-columns: 1fr; }
   .reset-bar { align-items: flex-start; flex-direction: column; }
   .page-footer { align-items: flex-start; flex-direction: column; }

@@ -20,6 +20,15 @@ const exerciseInfo = {
   'date-time': { number: '09', level: 'Intermediate', title: 'Date & time', description: 'Enter dates and times, select a range, and validate the result.' },
   mouse: { number: '10', level: 'Intermediate', title: 'Mouse actions', description: 'Practice hover, double-click, and right-click interactions.' },
   keyboard: { number: '11', level: 'Intermediate', title: 'Keyboard actions', description: 'Capture key presses, combinations, and keyboard form submission.' },
+  upload: { number: '12', level: 'Intermediate', title: 'File upload', description: 'Validate local files and practice a simulated upload workflow.' },
+  download: { number: '13', level: 'Intermediate', title: 'File downloads', description: 'Download predictable CSV, JSON, TXT, and PDF sample files.' },
+  'drag-drop': { number: '14', level: 'Intermediate', title: 'Drag & drop', description: 'Move task cards across workflow columns and verify their destination.' },
+  windows: { number: '15', level: 'Advanced', title: 'Tabs & windows', description: 'Open and close a child practice page in a new browser context.' },
+  iframe: { number: '16', level: 'Advanced', title: 'Iframe', description: 'Interact with a form embedded in an isolated iframe.' },
+  'shadow-dom': { number: '17', level: 'Advanced', title: 'Shadow DOM', description: 'Practice interacting with an open shadow-root web component.' },
+  authentication: { number: '18', level: 'Intermediate', title: 'Authentication', description: 'Practice local login success, validation, and locked-account scenarios.' },
+  network: { number: '19', level: 'Advanced', title: 'Network scenarios', description: 'Simulate status responses, timeouts, and network failures in the browser.' },
+  challenges: { number: '20', level: 'Advanced', title: 'Challenge lab', description: 'Work with changing selectors, hidden elements, and temporary DOM content.' },
 }
 
 export function PageHeading({ id, objective, children }) {

@@ -15,6 +15,17 @@ import {
   FiltersSection,
   PaginationSection,
 } from './features/NextExercises.jsx'
+import {
+  AuthenticationSection,
+  ChallengeSection,
+  DragDropSection,
+  DownloadSection,
+  FileUploadSection,
+  IframeSection,
+  NetworkSection,
+  ShadowDomSection,
+  WindowsSection,
+} from './features/RemainingExercises.jsx'
 
 const content = {
   inputs: InputsSection,
@@ -28,6 +39,15 @@ const content = {
   'date-time': DateTimeSection,
   mouse: MouseSection,
   keyboard: KeyboardSection,
+  upload: FileUploadSection,
+  download: DownloadSection,
+  'drag-drop': DragDropSection,
+  windows: WindowsSection,
+  iframe: IframeSection,
+  'shadow-dom': ShadowDomSection,
+  authentication: AuthenticationSection,
+  network: NetworkSection,
+  challenges: ChallengeSection,
 }
 
 function getActiveSection() {
@@ -94,7 +114,7 @@ function App() {
           <p className="nav-caption nav-caption-spaced">BUILD YOUR SKILLS</p>
           {sections.filter(({ id }) => ['tables', 'dynamic'].includes(id)).map(({ id, label, icon, level }) => navLink(id, label, icon, level))}
           <p className="nav-caption nav-caption-spaced">MORE PRACTICE</p>
-          {sections.filter(({ id }) => ['pagination', 'filters', 'date-time', 'mouse', 'keyboard'].includes(id)).map(({ id, label, icon, level }) => navLink(id, label, icon, level))}
+          {sections.filter(({ id }) => !['inputs', 'selections', 'buttons', 'forms', 'tables', 'dynamic'].includes(id)).map(({ id, label, icon, level }) => navLink(id, label, icon, level))}
           <div className="sidebar-note">
             <span className="note-icon" aria-hidden="true">✳</span>
             <strong>Practice at your pace</strong>
@@ -142,7 +162,7 @@ function Overview({ navigate }) {
 
       <div className="page-heading overview-heading">
         <div><p className="eyebrow">THE PRACTICE LAB</p><h2>Pick a place to start</h2><p className="section-subtitle">Small, focused exercises. Real browser interactions. No setup required.</p></div>
-        <span className="exercise-count">11 EXERCISE AREAS</span>
+        <span className="exercise-count">{sections.length} EXERCISE AREAS</span>
       </div>
 
       <div className="overview-grid">
@@ -174,6 +194,15 @@ const overviewDescriptions = {
   'date-time': 'Enter dates and times, then validate and compare a date range.',
   mouse: 'Practice hover, double-click, and right-click interactions.',
   keyboard: 'Capture key presses, combinations, and submitted keyboard input.',
+  upload: 'Validate local files, simulate progress, and remove selected files.',
+  download: 'Download sample CSV, JSON, text, and PDF files.',
+  'drag-drop': 'Move task cards between workflow columns using drag and drop.',
+  windows: 'Open a child practice page in a new tab or browser window.',
+  iframe: 'Interact with a small independent form embedded in an iframe.',
+  'shadow-dom': 'Locate and interact with form controls inside an open shadow root.',
+  authentication: 'Practice success, invalid credentials, and locked-account flows.',
+  network: 'Exercise simulated HTTP responses, timeouts, and network failures.',
+  challenges: 'Practice dynamic selectors, hidden content, delayed controls, and changing DOM.',
 }
 
 export default App

@@ -10,4 +10,13 @@ export const sections = [
   { id: 'date-time', label: 'Date & time', icon: '▦', level: 'Intermediate' },
   { id: 'mouse', label: 'Mouse actions', icon: '↗', level: 'Intermediate' },
   { id: 'keyboard', label: 'Keyboard actions', icon: '⌨', level: 'Intermediate' },
+  { id: 'upload', label: 'File upload', icon: '⇧', level: 'Intermediate' },
+  { id: 'download', label: 'File downloads', icon: '⇩', level: 'Intermediate' },
+  { id: 'drag-drop', label: 'Drag & drop', icon: '⠿', level: 'Intermediate' },
+  { id: 'windows', label: 'Tabs & windows', icon: '▣', level: 'Advanced' },
+  { id: 'iframe', label: 'Iframe', icon: '▱', level: 'Advanced' },
+  { id: 'shadow-dom', label: 'Shadow DOM', icon: '◈', level: 'Advanced' },
+  { id: 'authentication', label: 'Authentication', icon: '♙', level: 'Intermediate' },
+  { id: 'network', label: 'Network scenarios', icon: '⌁', level: 'Advanced' },
+  { id: 'challenges', label: 'Challenge lab', icon: '⚑', level: 'Advanced' },
 ]

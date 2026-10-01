@@ -113,13 +113,50 @@ export function DateTimeSection() {
   const [month, setMonth] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [pickerMonth, setPickerMonth] = useState(new Date(Date.UTC(2026, 9, 1)))
+  const [pickerDate, setPickerDate] = useState('')
   const rangeError = startDate && endDate && endDate < startDate
-  const reset = () => { setDate(''); setTime(''); setAppointment(''); setMonth(''); setStartDate(''); setEndDate('') }
+  const monthLabel = pickerMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+  const firstWeekday = (pickerMonth.getUTCDay() + 6) % 7
+  const daysInMonth = new Date(Date.UTC(pickerMonth.getUTCFullYear(), pickerMonth.getUTCMonth() + 1, 0)).getUTCDate()
+  const calendarDays = [
+    ...Array(firstWeekday).fill(null),
+    ...Array.from({ length: daysInMonth }, (_, index) => index + 1),
+  ]
+  const changeMonth = (delta) => setPickerMonth((current) => new Date(Date.UTC(current.getUTCFullYear(), current.getUTCMonth() + delta, 1)))
+  const reset = () => {
+    setDate('')
+    setTime('')
+    setAppointment('')
+    setMonth('')
+    setStartDate('')
+    setEndDate('')
+    setPickerDate('')
+    setPickerMonth(new Date(Date.UTC(2026, 9, 1)))
+  }
 
   return (
     <>
       <PageHeading id="date-time" objective="Enter native date and time values, validate a date range, and verify the selected values." />
       <div className="exercise-grid">
+        <ExerciseCard title="Custom date picker" description="A deterministic calendar starts in October 2026. Weekends and dates before October 1 are disabled." task="Choose an enabled weekday and verify its selected date. Try a disabled weekend.">
+          <div className="calendar-widget" aria-label="Practice date picker">
+            <div className="calendar-heading"><button className="page-button" type="button" aria-label="Previous month" onClick={() => changeMonth(-1)}>‹</button><strong>{monthLabel}</strong><button className="page-button" type="button" aria-label="Next month" onClick={() => changeMonth(1)}>›</button></div>
+            <div className="calendar-grid" role="group" aria-label={monthLabel}>
+              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => <span className="calendar-weekday" key={day}>{day}</span>)}
+              {calendarDays.map((day, index) => day === null
+                ? <span className="calendar-blank" key={`blank-${index}`} />
+                : (() => {
+                  const dayDate = new Date(Date.UTC(pickerMonth.getUTCFullYear(), pickerMonth.getUTCMonth(), day))
+                  const iso = `${dayDate.getUTCFullYear()}-${String(dayDate.getUTCMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+                  const weekend = dayDate.getUTCDay() === 0 || dayDate.getUTCDay() === 6
+                  const disabled = weekend || iso < '2026-10-01'
+                  return <button className={`calendar-day${pickerDate === iso ? ' calendar-selected' : ''}`} type="button" key={iso} disabled={disabled} aria-label={dayDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })} aria-pressed={pickerDate === iso} onClick={() => setPickerDate(iso)}>{day}</button>
+                })())}
+            </div>
+            <Result label="Selected date">{pickerDate || 'No date selected'}</Result>
+          </div>
+        </ExerciseCard>
         <ExerciseCard title="Date and time inputs" description="Use native browser date/time controls and inspect the resulting values." task="Set a preferred date and time, then verify both formatted values.">
           <div className="field-grid">
             <label className="field">Preferred date<input name="preferredDate" type="date" value={date} onChange={(event) => setDate(event.target.value)} /></label>
