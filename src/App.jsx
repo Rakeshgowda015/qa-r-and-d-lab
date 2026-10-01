@@ -68,6 +68,16 @@ function App() {
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
+  useEffect(() => {
+    if (active === 'overview') {
+      document.title = 'QA R&D Lab — Automation practice playground'
+      return
+    }
+
+    const section = sections.find(({ id }) => id === active)
+    document.title = `${section.label} | QA R&D Lab`
+  }, [active])
+
   const navLink = (id, label, icon, level) => (
     <a
       key={id}
