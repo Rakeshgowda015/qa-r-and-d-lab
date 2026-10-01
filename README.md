@@ -10,6 +10,10 @@ A free, static browser automation practice playground for QA engineers. The site
 - Forms: local registration form with validation feedback
 - Tables: stable sample data with search, sorting, and row actions
 - Dynamic elements and dialogs: visibility, bounded loading, changing state, modal, toast, and browser confirmation
+- Pagination and combined product filters
+- Native date/time inputs with date-range validation
+- Mouse hover, double-click, and context-menu exercises
+- Keyboard event capture and Enter-to-submit practice
 - Responsive, keyboard-accessible single-page navigation
 
 All exercise data and behavior run in the browser. There is no backend, account, or data persistence. Reloading restores the initial exercise state.

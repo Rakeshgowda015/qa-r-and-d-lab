@@ -15,9 +15,14 @@ const exerciseInfo = {
   forms: { number: '04', level: 'Beginner', title: 'Forms', description: 'Complete a registration form and inspect validation feedback.' },
   tables: { number: '05', level: 'Intermediate', title: 'Tables', description: 'Search and sort a predictable data set, then update a row.' },
   dynamic: { number: '06', level: 'Advanced', title: 'Dynamic elements & dialogs', description: 'Practice synchronization with bounded changes and common dialogs.' },
+  pagination: { number: '07', level: 'Intermediate', title: 'Pagination', description: 'Navigate a predictable list of records and inspect page boundaries.' },
+  filters: { number: '08', level: 'Intermediate', title: 'Search & filters', description: 'Combine search text with category, status, and price filters.' },
+  'date-time': { number: '09', level: 'Intermediate', title: 'Date & time', description: 'Enter dates and times, select a range, and validate the result.' },
+  mouse: { number: '10', level: 'Intermediate', title: 'Mouse actions', description: 'Practice hover, double-click, and right-click interactions.' },
+  keyboard: { number: '11', level: 'Intermediate', title: 'Keyboard actions', description: 'Capture key presses, combinations, and keyboard form submission.' },
 }
 
-function PageHeading({ id, objective, children }) {
+export function PageHeading({ id, objective, children }) {
   const info = exerciseInfo[id]
   return (
     <div className="exercise-heading">
@@ -32,7 +37,7 @@ function PageHeading({ id, objective, children }) {
   )
 }
 
-function ExerciseCard({ title, description, task, children, className = '' }) {
+export function ExerciseCard({ title, description, task, children, className = '' }) {
   return (
     <section className={`exercise-card ${className}`}>
       <div className="exercise-card-head"><div><h2>{title}</h2><p>{description}</p></div><span className="task-count">TRY IT</span></div>
@@ -42,7 +47,7 @@ function ExerciseCard({ title, description, task, children, className = '' }) {
   )
 }
 
-function Result({ children, label = 'Observed result' }) {
+export function Result({ children, label = 'Observed result' }) {
   return <div className="result-box" role="status"><span className="result-label">{label}</span><strong>{children}</strong></div>
 }
 
@@ -269,6 +274,99 @@ export function DynamicSection() {
       <div className="reset-bar"><p><strong>Done practicing?</strong> Reset all scenarios in this section to their initial state.</p><button type="button" className="button button-secondary button-small" onClick={resetDynamic}>Reset dynamic exercises</button></div>
       {modalOpen && <dialog ref={dialogRef} className="modal-dialog" aria-labelledby="modal-title" onCancel={(event) => { event.preventDefault(); setModalOpen(false) }} onClose={() => setModalOpen(false)} onKeyDown={(event) => { if (event.key === 'Escape') { event.preventDefault(); setModalOpen(false) } }}><button className="modal-close" type="button" aria-label="Close dialog" onClick={() => setModalOpen(false)}>×</button><span className="modal-icon" aria-hidden="true">✳</span><h2 id="modal-title">Practice details</h2><p>This is a modal dialog in the page. Its content is available while the dialog is open.</p><div className="modal-actions"><button className="button button-secondary" type="button" onClick={() => { setConfirmed('Dismissed'); setModalOpen(false) }}>Dismiss</button><button className="button button-primary" type="button" onClick={() => { setConfirmed('Confirmed'); setModalOpen(false) }}>Confirm action</button></div></dialog>}
       {toast && <div className="toast-message" role="status"><span aria-hidden="true">✓</span><strong>{toast}</strong><button type="button" aria-label="Dismiss notification" onClick={() => setToast('')}>×</button></div>}
+    </>
+  )
+}
+
+export function MouseSection() {
+  const [hovered, setHovered] = useState(false)
+  const [clicks, setClicks] = useState(0)
+  const [contextOpen, setContextOpen] = useState(false)
+  const [contextAction, setContextAction] = useState('')
+  const reset = () => {
+    setHovered(false)
+    setClicks(0)
+    setContextOpen(false)
+    setContextAction('')
+  }
+
+  return (
+    <>
+      <PageHeading id="mouse" objective="Use pointer hover, double-click, and right-click actions and verify their outcomes." />
+      <div className="exercise-grid">
+        <ExerciseCard title="Hover for a tooltip" description="Move the pointer over the target to reveal a short hint." task="Hover over the target, verify the tooltip, then move away.">
+          <button
+            className="mouse-hover-target"
+            type="button"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            onFocus={() => setHovered(true)}
+            onBlur={() => setHovered(false)}
+            aria-describedby="hover-tip"
+          >
+            Hover over me
+            <span id="hover-tip" className="mouse-tooltip" role="tooltip">You found the tooltip.</span>
+          </button>
+          <Result>Hover state: {hovered ? 'Target hovered' : 'Pointer away'}</Result>
+        </ExerciseCard>
+        <ExerciseCard title="Double-click target" description="A double-click increments the target counter once." task="Double-click the target and confirm its count increases by one.">
+          <button className="mouse-double-target" type="button" onDoubleClick={() => setClicks((count) => count + 1)}>Double-click target</button>
+          <Result>Double-click count: {clicks}</Result>
+        </ExerciseCard>
+        <ExerciseCard title="Context menu target" description="Right-click the target to show its practice context menu." task="Right-click the target and choose “Inspect item”.">
+          <div className="context-target" onContextMenu={(event) => { event.preventDefault(); setContextOpen(true); setContextAction('') }}>
+            <span>Practice item</span>
+            <span className="small-muted">Right-click anywhere in this target</span>
+            {contextOpen && <div className="context-menu" role="menu" aria-label="Practice item actions">
+              <button type="button" role="menuitem" onClick={() => { setContextAction('Item inspected'); setContextOpen(false) }}>Inspect item</button>
+              <button type="button" role="menuitem" onClick={() => { setContextAction('Item copied'); setContextOpen(false) }}>Copy item label</button>
+            </div>}
+          </div>
+          <Result>{contextAction || 'No context action yet.'}</Result>
+        </ExerciseCard>
+      </div>
+      <div className="reset-bar"><p><strong>Reset mouse exercises?</strong> Clear the interaction outcomes and counter.</p><button type="button" className="button button-secondary button-small" onClick={reset}>Reset mouse actions</button></div>
+    </>
+  )
+}
+
+export function KeyboardSection() {
+  const [lastKey, setLastKey] = useState('None yet')
+  const [submittedValue, setSubmittedValue] = useState('')
+  const [entry, setEntry] = useState('')
+
+  const handleKeyDown = (event) => {
+    const parts = []
+    if (event.ctrlKey || event.metaKey) parts.push(event.ctrlKey ? 'Ctrl' : 'Meta')
+    if (event.altKey) parts.push('Alt')
+    if (event.shiftKey && event.key.length !== 1) parts.push('Shift')
+    parts.push(event.key === ' ' ? 'Space' : event.key.length === 1 ? event.key.toUpperCase() : event.key)
+    setLastKey(parts.join(' + '))
+  }
+
+  const submit = (event) => {
+    event.preventDefault()
+    setSubmittedValue(entry || '(empty)')
+  }
+
+  return (
+    <>
+      <PageHeading id="keyboard" objective="Send keys to a focused control, observe key names and modifiers, and submit with the keyboard." />
+      <div className="exercise-grid">
+        <ExerciseCard title="Key event viewer" description="Focus the input and press keys or combinations to inspect the last key event." task="Press Tab, an arrow key, and Ctrl+A while the input is focused.">
+          <label className="field">Keyboard event input<input name="keyboardPlayground" type="text" placeholder="Focus here, then press keys" onKeyDown={handleKeyDown} /></label>
+          <Result>Last key: {lastKey}</Result>
+          <p className="small-muted">The input keeps its normal behavior so you can also practice selection, typing, and deletion.</p>
+        </ExerciseCard>
+        <ExerciseCard title="Submit with Enter" description="Submit the form using Enter while the text field has focus." task="Type a short message and press Enter to submit it.">
+          <form className="keyboard-form" onSubmit={submit}>
+            <label className="field">Quick message<input name="quickMessage" value={entry} onChange={(event) => setEntry(event.target.value)} placeholder="Type and press Enter" /></label>
+            <button className="button button-primary" type="submit">Submit message</button>
+          </form>
+          <Result>Submitted message: {submittedValue || 'Nothing submitted yet.'}</Result>
+        </ExerciseCard>
+      </div>
+      <div className="reset-bar"><p><strong>Reset keyboard exercises?</strong> Clear the recorded key and submitted message.</p><button type="button" className="button button-secondary button-small" onClick={() => { setLastKey('None yet'); setEntry(''); setSubmittedValue('') }}>Reset keyboard actions</button></div>
     </>
   )
 }

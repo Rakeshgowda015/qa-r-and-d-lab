@@ -5,9 +5,16 @@ import {
   DynamicSection,
   FormsSection,
   InputsSection,
+  KeyboardSection,
+  MouseSection,
   SelectionsSection,
   TablesSection,
 } from './features/Exercises.jsx'
+import {
+  DateTimeSection,
+  FiltersSection,
+  PaginationSection,
+} from './features/NextExercises.jsx'
 
 const content = {
   inputs: InputsSection,
@@ -16,6 +23,11 @@ const content = {
   forms: FormsSection,
   tables: TablesSection,
   dynamic: DynamicSection,
+  pagination: PaginationSection,
+  filters: FiltersSection,
+  'date-time': DateTimeSection,
+  mouse: MouseSection,
+  keyboard: KeyboardSection,
 }
 
 function getActiveSection() {
@@ -80,7 +92,9 @@ function App() {
           <p className="nav-caption nav-caption-spaced">BEGINNER PATH</p>
           {sections.filter(({ level }) => level === 'Beginner').map(({ id, label, icon, level }) => navLink(id, label, icon, level))}
           <p className="nav-caption nav-caption-spaced">BUILD YOUR SKILLS</p>
-          {sections.filter(({ level }) => level !== 'Beginner').map(({ id, label, icon, level }) => navLink(id, label, icon, level))}
+          {sections.filter(({ id }) => ['tables', 'dynamic'].includes(id)).map(({ id, label, icon, level }) => navLink(id, label, icon, level))}
+          <p className="nav-caption nav-caption-spaced">MORE PRACTICE</p>
+          {sections.filter(({ id }) => ['pagination', 'filters', 'date-time', 'mouse', 'keyboard'].includes(id)).map(({ id, label, icon, level }) => navLink(id, label, icon, level))}
           <div className="sidebar-note">
             <span className="note-icon" aria-hidden="true">✳</span>
             <strong>Practice at your pace</strong>
@@ -128,7 +142,7 @@ function Overview({ navigate }) {
 
       <div className="page-heading overview-heading">
         <div><p className="eyebrow">THE PRACTICE LAB</p><h2>Pick a place to start</h2><p className="section-subtitle">Small, focused exercises. Real browser interactions. No setup required.</p></div>
-        <span className="exercise-count">06 EXERCISE AREAS</span>
+        <span className="exercise-count">11 EXERCISE AREAS</span>
       </div>
 
       <div className="overview-grid">
@@ -155,6 +169,11 @@ const overviewDescriptions = {
   forms: 'Submit a registration form and verify helpful validation.',
   tables: 'Search, sort, and take actions on stable sample data.',
   dynamic: 'Wait for changing content and explore dialogs and notifications.',
+  pagination: 'Move through a predictable record set and inspect page boundaries.',
+  filters: 'Combine text search, categories, availability, and price constraints.',
+  'date-time': 'Enter dates and times, then validate and compare a date range.',
+  mouse: 'Practice hover, double-click, and right-click interactions.',
+  keyboard: 'Capture key presses, combinations, and submitted keyboard input.',
 }
 
 export default App
